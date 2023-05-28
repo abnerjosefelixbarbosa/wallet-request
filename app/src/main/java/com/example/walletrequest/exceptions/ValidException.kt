@@ -1,4 +1,3 @@
-package com.example.walletrequest.exeptions
+package com.example.walletrequest.exceptions
 
-class ValidException {
-}
+class ValidException(msg: String) : Exception(msg)

@@ -1,5 +1,6 @@
-package com.example.walletrequest
+package com.example.walletrequest.services
 
+import com.example.walletrequest.models.Card
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.DELETE

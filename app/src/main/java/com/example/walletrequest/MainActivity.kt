@@ -4,10 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
-import android.widget.Toast
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.example.walletrequest.configs.ConfRetrofit
 
 class MainActivity : AppCompatActivity() {
     private lateinit var configuracao: ConfRetrofit
@@ -23,22 +20,5 @@ class MainActivity : AppCompatActivity() {
                 startActivity(it)
             }
         }
-
-        /*
-        configuracao = ConfRetrofit()
-
-        val servico = configuracao.service
-
-        servico.getAll().enqueue(object : Callback<List<Card>> {
-            override fun onResponse(call: Call<List<Card>>, response: Response<List<Card>>) {
-                //Toast.makeText(this, 1, Toast.LENGTH_LONG)
-                Toast.makeText(this@MainActivity, "Sucesso", Toast.LENGTH_LONG).show();
-            }
-
-            override fun onFailure(call: Call<List<Card>>, t: Throwable) {
-                println(t.message)
-            }
-        })
-        */
     }
 }

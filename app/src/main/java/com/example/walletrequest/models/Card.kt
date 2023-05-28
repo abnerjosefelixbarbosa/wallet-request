@@ -1,4 +1,4 @@
-package com.example.walletrequest
+package com.example.walletrequest.models
 
 data class Card(
     val id: String,

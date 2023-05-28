@@ -1,5 +1,6 @@
-package com.example.walletrequest
+package com.example.walletrequest.configs
 
+import com.example.walletrequest.services.ServiceCard
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
