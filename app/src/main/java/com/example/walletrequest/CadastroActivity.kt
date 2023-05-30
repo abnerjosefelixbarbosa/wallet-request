@@ -1,5 +1,6 @@
 package com.example.walletrequest
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -13,11 +14,14 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.lang.Exception
+import java.lang.RuntimeException
+import java.lang.reflect.InvocationTargetException
 import java.util.UUID
 
 
 class CadastroActivity : AppCompatActivity() {
     private var configuracao = ConfRetrofit();
+    private var card: Card? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,12 +35,11 @@ class CadastroActivity : AppCompatActivity() {
 
         btAvancar.setOnClickListener() {
             try {
-                val id: UUID = UUID.randomUUID();
                 val cardTypes = listOf<String>("BLACK","GREEN")
                 val randomElement = cardTypes.randomOrNull()
 
-                val card = Card(
-                    id.toString(),
+                card = Card(
+                    UUID.randomUUID().toString(),
                     edName.text.toString(),
                     edCode.text.toString(),
                     edNumber.text.toString(),
@@ -44,8 +47,7 @@ class CadastroActivity : AppCompatActivity() {
                     randomElement.toString(),
                 )
 
-                validForm(card)
-                post(card)
+                validForm(card!!)
             } catch (e : ValidException) {
                 Toast.makeText(this, e.message, Toast.LENGTH_LONG).show()
             } catch (e : Exception) {
@@ -69,20 +71,49 @@ class CadastroActivity : AppCompatActivity() {
             throw  ValidException("data invalida")
         if (card.cardType.isEmpty())
             throw  ValidException("tipo do carão vázio")
+        getAll()
+    }
+
+    private fun getAll() {
+        val service = configuracao.service
+        service.getAll().enqueue(object : Callback<List<Card>> {
+            override fun onResponse(call: Call<List<Card>>, response: Response<List<Card>>) {
+                val list: List<Card>? = response.body()
+                val listFilter = list!!.filter {
+                    (it.number == card!!.number || it.cvv == card!!.cvv)
+                }
+                if (listFilter.isEmpty() === false)
+                    Toast.makeText(this@CadastroActivity, "número ou cvv existe", Toast.LENGTH_LONG).show()
+                else
+                    post(card!!)
+            }
+
+            override fun onFailure(call: Call<List<Card>>, t: Throwable) {
+                Toast.makeText(this@CadastroActivity, t.message.toString(), Toast.LENGTH_LONG).show()
+            }
+        })
     }
 
     private fun post(card: Card) {
         val service = configuracao.service
         service.createCard(card).enqueue(object : Callback<Card> {
             override fun onResponse(call: Call<Card>, response: Response<Card>) {
-                if (response.code() == 500) {
-
-                    Toast.makeText(this@CadastroActivity, "Cartão cadastrado", Toast.LENGTH_LONG).show()
+                if (card.cardType == "BLACK") {
+                    val openDetalhes = Intent(this@CadastroActivity, DetalhesActivity::class.java).also {
+                        it.putExtra("ID", card.id)
+                        startActivity(it)
+                    }
+                }
+                if (card.cardType == "GREEN") {
+                    val openDetalhes2 = Intent(this@CadastroActivity, DetalhesActivity2::class.java).also {
+                        it.putExtra("ID", card.id)
+                        startActivity(it)
+                    }
                 }
             }
 
             override fun onFailure(call: Call<Card>, t: Throwable) {
-                throw  ValidException(t.message.toString())
+                Toast.makeText(this@CadastroActivity, t.message.toString(), Toast.LENGTH_LONG).show()
             }
         })
     }
