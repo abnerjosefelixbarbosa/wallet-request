@@ -27,7 +27,7 @@ class DetalhesActivity : AppCompatActivity() {
 
         getByID(idCard)
         btVoltar.setOnClickListener() {
-            val openMainActivity = Intent(this, MainActivity::class.java).also {
+            Intent(this, MainActivity::class.java).also {
                 startActivity(it)
             }
         }
@@ -43,7 +43,7 @@ class DetalhesActivity : AppCompatActivity() {
                 val tvCardNumber = findViewById<TextView>(R.id.tvCardNumber)
                 val tvCardValidade = findViewById<TextView>(R.id.tvCardValidade)
 
-                tvCardType.text = card?.cardType
+                tvCardType.text = card?.cardType + " Card"
                 tvCardNome.text = card?.name
                 tvCardNumber.text = card?.number
                 tvCardValidade.text = card?.expirationDate

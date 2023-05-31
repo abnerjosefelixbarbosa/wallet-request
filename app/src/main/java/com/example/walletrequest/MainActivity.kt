@@ -14,9 +14,16 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val btOpenCad = findViewById<Button>(R.id.btOpenCad)
+        val btOpenList = findViewById<Button>(R.id.btOpenList)
 
         btOpenCad.setOnClickListener() {
-            val openCadastro = Intent(this, CadastroActivity::class.java).also {
+            Intent(this, CadastroActivity::class.java).also {
+                startActivity(it)
+            }
+        }
+
+        btOpenList.setOnClickListener() {
+            Intent(this, SplashActivity::class.java).also {
                 startActivity(it)
             }
         }

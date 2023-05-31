@@ -18,7 +18,6 @@ import java.lang.RuntimeException
 import java.lang.reflect.InvocationTargetException
 import java.util.UUID
 
-
 class CadastroActivity : AppCompatActivity() {
     private var configuracao = ConfRetrofit();
     private var card: Card? = null
@@ -82,7 +81,7 @@ class CadastroActivity : AppCompatActivity() {
                 val listFilter = list!!.filter {
                     (it.number == card!!.number || it.cvv == card!!.cvv)
                 }
-                if (listFilter.isEmpty() === false)
+                if (listFilter.isNotEmpty())
                     Toast.makeText(this@CadastroActivity, "número ou cvv existe", Toast.LENGTH_LONG).show()
                 else
                     post(card!!)
@@ -99,13 +98,13 @@ class CadastroActivity : AppCompatActivity() {
         service.createCard(card).enqueue(object : Callback<Card> {
             override fun onResponse(call: Call<Card>, response: Response<Card>) {
                 if (card.cardType == "BLACK") {
-                    val openDetalhes = Intent(this@CadastroActivity, DetalhesActivity::class.java).also {
+                    Intent(this@CadastroActivity, DetalhesActivity::class.java).also {
                         it.putExtra("ID", card.id)
                         startActivity(it)
                     }
                 }
                 if (card.cardType == "GREEN") {
-                    val openDetalhes2 = Intent(this@CadastroActivity, DetalhesActivity2::class.java).also {
+                    Intent(this@CadastroActivity, DetalhesActivity2::class.java).also {
                         it.putExtra("ID", card.id)
                         startActivity(it)
                     }
