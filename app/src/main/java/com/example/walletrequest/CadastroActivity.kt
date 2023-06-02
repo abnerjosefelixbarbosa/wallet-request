@@ -97,17 +97,9 @@ class CadastroActivity : AppCompatActivity() {
         val service = configuracao.service
         service.createCard(card).enqueue(object : Callback<Card> {
             override fun onResponse(call: Call<Card>, response: Response<Card>) {
-                if (card.cardType == "BLACK") {
-                    Intent(this@CadastroActivity, DetalhesActivity::class.java).also {
-                        it.putExtra("ID", card.id)
-                        startActivity(it)
-                    }
-                }
-                if (card.cardType == "GREEN") {
-                    Intent(this@CadastroActivity, DetalhesActivity2::class.java).also {
-                        it.putExtra("ID", card.id)
-                        startActivity(it)
-                    }
+                Intent(this@CadastroActivity, DetalhesActivity::class.java).also {
+                    it.putExtra("ID", card.id)
+                    startActivity(it)
                 }
             }
 

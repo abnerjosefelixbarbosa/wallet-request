@@ -34,19 +34,7 @@ class ListaActivity : AppCompatActivity() {
     }
 
     private fun filterList(list: List<Card>) {
-        val recyclerBlackCard = findViewById<RecyclerView>(R.id.rvListBlackVersion)
-        val recyclerGreenCard = findViewById<RecyclerView>(R.id.rvListGreenVersion)
-        val listFilterBlackCard = list.filter {
-            (it.cardType == "BLACK")
-        }
-        val listFilterGreenCard = list.filter {
-            (it.cardType == "GREEN")
-        }
-        if (listFilterBlackCard.isNotEmpty()) {
-            recyclerBlackCard.adapter = AdapterBlackCard(listFilterBlackCard)
-        }
-        if (listFilterGreenCard.isNotEmpty()) {
-            recyclerGreenCard.adapter = AdapterGreenCard(listFilterGreenCard)
-        }
+        val recyclerBlackCard = findViewById<RecyclerView>(R.id.rvListVersion)
+        recyclerBlackCard.adapter = Adapter(list)
     }
 }

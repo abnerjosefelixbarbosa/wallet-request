@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/clConteinerCardBlack"
+    android:id="@+id/clConteinerCardItem"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingVertical="30dp"
@@ -10,7 +10,7 @@
     android:background="#C9C9C9">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/clCardBackLayout"
+        android:id="@+id/clCardItemLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
@@ -23,7 +23,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/tvCardTypeListCardBlack"
+            android:id="@+id/tvCardTypeItem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Black Card"
@@ -32,34 +32,34 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tvCardNomeListCardBlack"
+            android:id="@+id/tvCardNomeItem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:text="João Carlos Pereira"
             android:textColor="@color/white"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvCardTypeListCardBlack" />
+            app:layout_constraintTop_toBottomOf="@id/tvCardTypeItem" />
 
         <TextView
-            android:id="@+id/tvCardNumberListCardBlack"
+            android:id="@+id/tvCardNumberItem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="**** **** **** 2345"
             android:textColor="@color/white"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvCardNomeListCardBlack" />
+            app:layout_constraintTop_toBottomOf="@id/tvCardNomeItem" />
 
         <TextView
-            android:id="@+id/tvCardValidadeListCardBlack"
+            android:id="@+id/tvCardValidadeItem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="Validade 04/25"
             android:textColor="@color/white"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvCardNumberListCardBlack" />
+            app:layout_constraintTop_toBottomOf="@id/tvCardNumberItem" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

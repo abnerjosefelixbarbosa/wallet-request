@@ -27,9 +27,6 @@
             android:name=".SplashActivity"
             android:exported="false" />
         <activity
-            android:name=".DetalhesActivity2"
-            android:exported="false" />
-        <activity
             android:name=".DetalhesActivity"
             android:exported="false" />
         <activity
